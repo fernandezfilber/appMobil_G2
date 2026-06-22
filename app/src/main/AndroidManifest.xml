@@ -11,15 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppMobil">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity" android:exported="false" />
+        <activity android:name=".RegistroActivity" android:exported="false" />
+        <activity android:name=".TableroActivity" android:exported="false" />
+        <activity android:name=".CuentaActivity" android:exported="false" />
+        <activity android:name=".CursosActivity" android:exported="false" />
+        <activity android:name=".CalendarioActivity" android:exported="false" />
+        <activity android:name=".BandejaEntradaActivity" android:exported="false" />
+        <activity android:name=".HistorialActivity" android:exported="false" />
+        <activity android:name=".GuiaUsoActivity" android:exported="false" />
+
     </application>
 
 </manifest>

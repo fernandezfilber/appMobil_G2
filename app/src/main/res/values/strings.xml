@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">appMobil</string>
+    <string name="app_brand">SISE</string>
+
+    <!-- Login -->
+    <string name="welcome_title">Bienvenido</string>
+    <string name="login_subtitle">Inicia sesión para continuar</string>
+    <string name="email_label">Correo Electrónico</string>
+    <string name="email_hint">ejemplo@correo.com</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_hint">********</string>
+    <string name="login_button">INGRESAR</string>
+    <string name="no_account_register">¿No tienes cuenta? Regístrate aquí</string>
+
+    <!-- Registro -->
+    <string name="register_title">Crear Cuenta</string>
+    <string name="register_subtitle">Regístrate para continuar</string>
+    <string name="name_label">Nombre</string>
+    <string name="name_hint">Tu nombre completo</string>
+    <string name="phone_label">Teléfono</string>
+    <string name="phone_hint">999999999</string>
+    <string name="bio_label">Biografía</string>
+    <string name="bio_hint">Breve descripción</string>
+    <string name="register_button">REGISTRARSE</string>
+    <string name="already_have_account">¿Ya tienes cuenta? Inicia sesión</string>
+
+    <!-- Principal & Navigation -->
+    <string name="aula_virtual">Aula Virtual</string>
+    <string name="today">Hoy</string>
+    <string name="banner_activities">SISE\nACTIVIDADES ACADÉMICAS</string>
+    <string name="pending_activities">Pendientes por realizar</string>
+    <string name="delivered_activities">Actividades Entregadas</string>
+    <string name="label_exam">EXAMEN</string>
+    <string name="label_delivered">ENTREGADO</string>
+    <string name="rate_class">Califica tu clase</string>
+    <string name="evaluate_teacher">Evalúa a tu docente</string>
+    <string name="activities_title">Actividades</string>
+
+    <string name="nav_tablero">Tablero</string>
+    <string name="nav_account">Cuenta</string>
+    <string name="nav_courses">Cursos</string>
+    <string name="nav_calendar">Calendario</string>
+    <string name="nav_inbox">Bandeja de entrada</string>
+    <string name="nav_history">Historial</string>
+    <string name="nav_guides">GUIAS DE USO</string>
+
+    <!-- Cuenta -->
+    <string name="profile_title">Perfil de Usuario</string>
+    <string name="edit_profile">EDITAR PERFIL</string>
+
+    <!-- Cursos -->
+    <string name="my_courses_title">Mis Cursos</string>
+
+    <!-- Calendario -->
+    <string name="calendar_title">Calendario</string>
+    <string name="events_day">Eventos del día</string>
+
+    <!-- Bandeja -->
+    <string name="inbox_title">Bandeja de Entrada</string>
+
+    <!-- Historial -->
+    <string name="history_title">Historial</string>
+
+    <!-- Guía -->
+    <string name="guide_title">Guía de Uso</string>
 </resources>
