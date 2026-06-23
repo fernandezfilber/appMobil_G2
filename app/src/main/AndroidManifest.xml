@@ -23,13 +23,12 @@
 
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".RegistroActivity" android:exported="false" />
-        <activity android:name=".TableroActivity" android:exported="false" />
         <activity android:name=".CuentaActivity" android:exported="false" />
-        <activity android:name=".CursosActivity" android:exported="false" />
         <activity android:name=".CalendarioActivity" android:exported="false" />
         <activity android:name=".BandejaEntradaActivity" android:exported="false" />
         <activity android:name=".HistorialActivity" android:exported="false" />
         <activity android:name=".GuiaUsoActivity" android:exported="false" />
+
 
     </application>
 
