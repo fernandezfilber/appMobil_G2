@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,13 +25,17 @@
 
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".RegistroActivity" android:exported="false" />
-        <activity android:name=".CuentaActivity" android:exported="false" />
-        <activity android:name=".CalendarioActivity" android:exported="false" />
-        <activity android:name=".BandejaEntradaActivity" android:exported="false" />
-        <activity android:name=".HistorialActivity" android:exported="false" />
-        <activity android:name=".GuiaUsoActivity" android:exported="false" />
 
-
+        <!-- Nuevas Actividades del Tablero -->
+        <activity android:name=".HorarioActivity" android:exported="false" />
+        <activity android:name=".MatriculaActivity" android:exported="false" />
+        <activity android:name=".NotasActivity" android:exported="false" />
+        <activity android:name=".CursosActivity" android:exported="false" />
+        <activity android:name=".AsistenciasActivity" android:exported="false" />    
+        <activity android:name=".TareasActivity" android:exported="false" />    
+        <activity android:name=".AnunciosActivity" android:exported="false" />    
+        <activity android:name=".AjustesActivity" android:exported="false" />    
+        <activity android:name=".BuscarActivity" android:exported="false" />    
     </application>
 
 </manifest>

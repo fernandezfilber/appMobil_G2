@@ -1,19 +1,290 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/layout_principal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="omar  "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Barra Superior -->
+        <LinearLayout
+            android:id="@+id/barra_superior"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- Logo SISE -->
+            <TextView
+                android:id="@+id/tv_titulo_barra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SISE»"
+                android:textColor="#E53935"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/boton_refrescar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="4dp"
+                android:src="@android:drawable/ic_popup_sync"
+                app:tint="#333333" />
+
+            <ImageView
+                android:id="@+id/boton_opciones"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:padding="4dp"
+                android:src="@android:drawable/ic_menu_more"
+                app:tint="#333333" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@id/barra_inferior"
+            app:layout_constraintTop_toBottomOf="@id/barra_superior">
+
+            <!-- Este es el contenedor donde cargarás tus vistas dinámicamente -->
+            <LinearLayout
+                android:id="@+id/contenedor_actividades_dinamico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- Contenido por defecto (puedes dejar el banner aquí si es fijo) -->
+                <TextView
+                    android:id="@+id/banner_principal"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="#E53935"
+                    android:gravity="center"
+                    android:text="SISE AULA VIRTUAL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_encabezado_actividades"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Actividades Académicas"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Botón Flotante para agregar tareas -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarTarea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toTopOf="@id/barra_inferior"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="#FFFFFF"
+            app:backgroundTint="#E53935" />
+
+        <!-- Barra Navegación Inferior -->
+        <LinearLayout
+            android:id="@+id/barra_inferior"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/nav_inicio"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Inicio"
+                android:textColor="#005596"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nav_ajustes"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Ajustes"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/nav_horario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Horario"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/nav_alertas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Alertas"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/nav_buscar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Buscar"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Menú Lateral -->
+    <LinearLayout
+        android:id="@+id/menu_lateral"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SISE"
+                android:textColor="#E53935"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/boton_cerrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:text="✕"
+                android:textColor="#333333"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/nav_tablero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Tablero"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:drawableStart="@android:drawable/ic_menu_today"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_cuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Cuenta"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_menu_my_calendar"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_cursos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Cursos"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_menu_agenda"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_calendario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Calendario"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_menu_today"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_bandeja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Bandeja"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_dialog_email"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_historial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Historial"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_menu_recent_history"
+            android:drawablePadding="16dp" />
+
+        <TextView
+            android:id="@+id/nav_guia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:text="Guía"
+            android:textColor="#005596"
+            android:textSize="16sp"
+            android:drawableStart="@android:drawable/ic_menu_help"
+            android:drawablePadding="16dp" />
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

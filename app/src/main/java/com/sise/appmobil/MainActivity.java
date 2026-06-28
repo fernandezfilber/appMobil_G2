@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.sise.appmobil.network.ApiService;
+import com.sise.appmobil.network.ApiClient;
+import com.sise.appmobil.network.BaseResponse;
+import com.sise.appmobil.models.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -28,24 +37,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal);
+        setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.layout_principal);
         contenedorDinamico = findViewById(R.id.contenedor_actividades_dinamico);
         tvTituloBarra = findViewById(R.id.tv_titulo_barra);
         btnAgregarTarea = findViewById(R.id.btnAgregarTarea);
 
-        TextView botonMenu = findViewById(R.id.boton_menu);
         TextView botonCerrar = findViewById(R.id.boton_cerrar);
-
-        if (botonMenu != null) {
-            botonMenu.setOnClickListener(v -> {
-                if (drawerLayout != null) {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-            });
-        }
-
         if (botonCerrar != null) {
             botonCerrar.setOnClickListener(v -> {
                 if (drawerLayout != null) {
@@ -54,60 +53,31 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // Configuración única del botón flotante fijo con Formulario Dialog
-        if (btnAgregarTarea != null) {
-            btnAgregarTarea.setOnClickListener(v -> {
-                // Crear un contenedor con márgenes limpios para los campos de texto
-                LinearLayout layoutFormulario = new LinearLayout(MainActivity.this);
-                layoutFormulario.setOrientation(LinearLayout.VERTICAL);
-                layoutFormulario.setPadding(60, 30, 60, 20);
-
-                // Campo 1: Título de la tarea
-                final EditText inputTitulo = new EditText(MainActivity.this);
-                inputTitulo.setHint("Título (Ej: Examen Parcial)");
-                layoutFormulario.addView(inputTitulo);
-
-                // Campo 2: Descripción de la tarea
-                final EditText inputDescripcion = new EditText(MainActivity.this);
-                inputDescripcion.setHint("Descripción (Ej: Desarrollar el login)");
-                layoutFormulario.addView(inputDescripcion);
-
-                // Campo 3: Fecha de entrega
-                final EditText inputFecha = new EditText(MainActivity.this);
-                inputFecha.setHint("Fecha de entrega (Ej: 24/06/2026)");
-                layoutFormulario.addView(inputFecha);
-
-                // Construir la ventana emergente interactiva
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Añadir Nueva Tarea")
-                        .setMessage("Ingresa los datos de la actividad académica:")
-                        .setView(layoutFormulario)
-                        .setPositiveButton("Agregar", (dialog, which) -> {
-                            String titulo = inputTitulo.getText().toString().trim();
-                            String descripcion = inputDescripcion.getText().toString().trim();
-                            String fecha = inputFecha.getText().toString().trim();
-
-                            // Validamos que no metan campos en blanco
-                            if (!titulo.isEmpty() && !descripcion.isEmpty() && !fecha.isEmpty()) {
-                                // 1. Creamos el objeto Tarea real
-                                Tarea nuevaTarea = new Tarea(titulo, descripcion, fecha, "Pendiente");
-
-                                // 2. Lo agregamos al repositorio global indexado
-                                DataRepository.getInstance().getListaTareas().add(nuevaTarea);
-
-                                // 3. Forzamos el refresco visual instantáneo del tablero
-                                cargarVistaTablero();
-
-                                Toast.makeText(MainActivity.this, "¡Tarea agregada con éxito!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(MainActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("Cancelar", null)
-                        .show();
+        // Configuración para Cerrar Sesión con los 3 puntos
+        ImageView botonOpciones = findViewById(R.id.boton_opciones);
+        if (botonOpciones != null) {
+            botonOpciones.setOnClickListener(v -> {
+                android.content.SharedPreferences prefs = getSharedPreferences("AppMobilPrefs", MODE_PRIVATE);
+                prefs.edit().clear().apply();
+                android.content.Intent intent = new android.content.Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             });
         }
 
+        // Configurar Barra Inferior (Bottom Navigation)
+        TextView navAjustes = findViewById(R.id.nav_ajustes);
+        TextView navHorario = findViewById(R.id.nav_horario);
+        TextView navAlertas = findViewById(R.id.nav_alertas);
+        TextView navBuscar = findViewById(R.id.nav_buscar);
+
+        if (navAjustes != null) navAjustes.setOnClickListener(v -> navigate(AjustesActivity.class));
+        if (navHorario != null) navHorario.setOnClickListener(v -> navigate(HorarioActivity.class));
+        if (navAlertas != null) navAlertas.setOnClickListener(v -> navigate(AnunciosActivity.class));
+        if (navBuscar != null) navBuscar.setOnClickListener(v -> navigate(BuscarActivity.class));
+        // El botón flotante de agregar tarea ya no se usa aquí en el tablero principal 
+        
         // Al iniciar la app por primera vez, cargamos el tablero
         cargarVistaTablero();
 
@@ -128,77 +98,75 @@ public class MainActivity extends AppCompatActivity {
             cerrarMenu();
         });
 
-        if (navCursos != null) navCursos.setOnClickListener(v -> {
-            cargarVistaCursos();
-            cerrarMenu();
-        });
+        if (navCursos != null) navCursos.setOnClickListener(v -> navigate(CursosActivity.class));
 
-        if (navCuenta != null) navCuenta.setOnClickListener(v -> navigate(CuentaActivity.class));
-        if (navCalendario != null) navCalendario.setOnClickListener(v -> navigate(CalendarioActivity.class));
-        if (navBandeja != null) navBandeja.setOnClickListener(v -> navigate(BandejaEntradaActivity.class));
-        if (navHistorial != null) navHistorial.setOnClickListener(v -> navigate(HistorialActivity.class));
-        if (navGuia != null) navGuia.setOnClickListener(v -> navigate(GuiaUsoActivity.class));
+
     }
 
     //  METODO 1 CARGAR EL TABLERO DE TAREAS EN LOS ESPACIOS DINAMICOS
     private void cargarVistaTablero() {
         if (contenedorDinamico == null) return;
         contenedorDinamico.removeAllViews();
-        if (tvTituloBarra != null) tvTituloBarra.setText("Tablero");
+        if (tvTituloBarra != null) tvTituloBarra.setText("SISE»");
 
-        // MOSTRAR el banner, el encabezado y el botón flotante correspondientes al Tablero
-        View banner = findViewById(R.id.banner_principal);
-        View encabezado = findViewById(R.id.tv_encabezado_actividades);
-        if (banner != null) banner.setVisibility(View.VISIBLE);
-        if (encabezado != null) encabezado.setVisibility(View.VISIBLE);
-        if (btnAgregarTarea != null) btnAgregarTarea.setVisibility(View.VISIBLE); // Hacer visible el botón "+"
-
-        // Inflamos tu layout 'tablero.xml' limpio
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View vistaTablero = inflater.inflate(R.layout.tablero, contenedorDinamico, false);
-        contenedorDinamico.addView(vistaTablero);
-
-        // Configuramos su RecyclerView interno
-        RecyclerView rvTareas = vistaTablero.findViewById(R.id.rvTareas);
-        if (rvTareas != null) {
-            rvTareas.setLayoutManager(new LinearLayoutManager(this));
-            rvTareas.setNestedScrollingEnabled(false);
-
-            ArrayList<Tarea> listaTareas = DataRepository.getInstance().getListaTareas();
-            TareaAdapter tareaAdapter = new TareaAdapter(listaTareas);
-            rvTareas.setAdapter(tareaAdapter);
-        }
-    }
-
-    // METODO 2 CARGAR LOS CURSOS EN LOS ESPACIOS DINAMICOS
-    private void cargarVistaCursos() {
-        if (contenedorDinamico == null) return;
-        contenedorDinamico.removeAllViews();
-        if (tvTituloBarra != null) tvTituloBarra.setText("Mis Cursos");
-
-
+        // Ocultar elementos antiguos
         View banner = findViewById(R.id.banner_principal);
         View encabezado = findViewById(R.id.tv_encabezado_actividades);
         if (banner != null) banner.setVisibility(View.GONE);
         if (encabezado != null) encabezado.setVisibility(View.GONE);
-        if (btnAgregarTarea != null) btnAgregarTarea.setVisibility(View.GONE); // Ocultar el botón "+" en Cursos
 
-
+        // Inflamos el nuevo layout 'layout_tablero.xml'
         LayoutInflater inflater = LayoutInflater.from(this);
-        View vistaCursos = inflater.inflate(R.layout.cursos, contenedorDinamico, false);
-        contenedorDinamico.addView(vistaCursos);
+        View vistaTablero = inflater.inflate(R.layout.layout_tablero, contenedorDinamico, false);
+        contenedorDinamico.addView(vistaTablero);
 
-        // Configuramos el RecyclerView interno de los cursos
-        RecyclerView rvCursos = vistaCursos.findViewById(R.id.rvCursos);
-        if (rvCursos != null) {
-            rvCursos.setLayoutManager(new LinearLayoutManager(this));
-            rvCursos.setNestedScrollingEnabled(false);
+        TextView tvHolaNombre = vistaTablero.findViewById(R.id.tv_hola_nombre);
 
-            ArrayList<Curso> listaCursos = DataRepository.getInstance().getListaCursos();
-            CursoAdapter cursoAdapter = new CursoAdapter(listaCursos);
-            rvCursos.setAdapter(cursoAdapter);
-        }
+        // Enlazar clics de las tarjetas del tablero
+        View cardHorario = vistaTablero.findViewById(R.id.card_horario);
+        if (cardHorario != null) cardHorario.setOnClickListener(v -> navigate(HorarioActivity.class));
+
+        View cardMatricula = vistaTablero.findViewById(R.id.card_matricula);
+        if (cardMatricula != null) cardMatricula.setOnClickListener(v -> navigate(MatriculaActivity.class));
+
+        View cardNotas = vistaTablero.findViewById(R.id.card_notas);
+        if (cardNotas != null) cardNotas.setOnClickListener(v -> navigate(NotasActivity.class));
+
+        View cardCursos = vistaTablero.findViewById(R.id.card_cursos);
+        if (cardCursos != null) cardCursos.setOnClickListener(v -> navigate(CursosActivity.class));
+
+        View cardAsistencias = vistaTablero.findViewById(R.id.card_asistencias);
+        if (cardAsistencias != null) cardAsistencias.setOnClickListener(v -> navigate(AsistenciasActivity.class));
+
+        View cardTareas = vistaTablero.findViewById(R.id.card_tareas);
+        if (cardTareas != null) cardTareas.setOnClickListener(v -> navigate(TareasActivity.class));
+
+        View cardAnuncios = vistaTablero.findViewById(R.id.card_anuncios);
+        if (cardAnuncios != null) cardAnuncios.setOnClickListener(v -> navigate(AnunciosActivity.class));
+
+        // Llamar a Retrofit para obtener datos del usuario
+        ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
+        
+        apiService.getMe().enqueue(new Callback<BaseResponse<User>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<User>> call, Response<BaseResponse<User>> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    String fullName = response.body().getData().getName();
+                    String firstName = fullName.split(" ")[0]; // Solo el primer nombre
+                    if (tvHolaNombre != null) {
+                        tvHolaNombre.setText("Hola,\n" + firstName);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<User>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
+
+
 
     private void cerrarMenu() {
         if (drawerLayout != null) {

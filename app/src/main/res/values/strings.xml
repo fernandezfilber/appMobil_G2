@@ -1,66 +1,69 @@
 <resources>
     <string name="app_name">appMobil</string>
-    <string name="app_brand">SISE</string>
+    <string name="nombre_app">SISE</string>
 
-    <!-- Login -->
-    <string name="welcome_title">Bienvenido</string>
-    <string name="login_subtitle">Inicia sesión para continuar</string>
-    <string name="email_label">Correo Electrónico</string>
-    <string name="email_hint">ejemplo@correo.com</string>
-    <string name="password_label">Contraseña</string>
-    <string name="password_hint">********</string>
-    <string name="login_button">INGRESAR</string>
-    <string name="no_account_register">¿No tienes cuenta? Regístrate aquí</string>
+    <!-- Login y Registro -->
+    <string name="bienvenida">Bienvenido</string>
+    <string name="iniciar_sesion_subtitulo">Inicia sesión para continuar</string>
+    <string name="correo_label">Correo Electrónico</string>
+    <string name="correo_pista">ejemplo@correo.com</string>
+    <string name="contrasena_label">Contraseña</string>
+    <string name="contrasena_pista">********</string>
+    <string name="boton_ingresar">INGRESAR</string>
+    <string name="registrar_cuenta">¿No tienes cuenta? Regístrate aquí</string>
 
-    <!-- Registro -->
-    <string name="register_title">Crear Cuenta</string>
-    <string name="register_subtitle">Regístrate para continuar</string>
-    <string name="name_label">Nombre</string>
-    <string name="name_hint">Tu nombre completo</string>
-    <string name="phone_label">Teléfono</string>
-    <string name="phone_hint">999999999</string>
-    <string name="bio_label">Biografía</string>
-    <string name="bio_hint">Breve descripción</string>
-    <string name="register_button">REGISTRARSE</string>
-    <string name="already_have_account">¿Ya tienes cuenta? Inicia sesión</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="registro_subtitulo">Regístrate para continuar</string>
+    <string name="nombre_label">Nombre</string>
+    <string name="nombre_pista">Tu nombre completo</string>
+    <string name="telefono_label">Teléfono</string>
+    <string name="telefono_pista">999999999</string>
+    <string name="biografia_label">Biografía</string>
+    <string name="biografia_pista">Breve descripción</string>
+    <string name="boton_registrarse">REGISTRARSE</string>
+    <string name="ya_tengo_cuenta">¿Ya tienes cuenta? Inicia sesión</string>
 
-    <!-- Principal & Navigation -->
+    <!-- Dashboard Principal -->
+    <string name="saludo_usuario">Hola,\nFilber</string>
+    <string name="sise_card">SISE Card</string>
     <string name="aula_virtual">Aula Virtual</string>
-    <string name="today">Hoy</string>
-    <string name="banner_activities">SISE\nACTIVIDADES ACADÉMICAS</string>
-    <string name="pending_activities">Pendientes por realizar</string>
-    <string name="delivered_activities">Actividades Entregadas</string>
-    <string name="label_exam">EXAMEN</string>
-    <string name="label_delivered">ENTREGADO</string>
-    <string name="rate_class">Califica tu clase</string>
-    <string name="evaluate_teacher">Evalúa a tu docente</string>
-    <string name="activities_title">Actividades</string>
+    <string name="horario_titulo">Horario</string>
+    <string name="horario_proximo">en 3 días</string>
+    <string name="horario_curso_ejemplo">INTELIGENCIA DE NEGOCIOS</string>
+    <string name="horario_detalle_ejemplo">martes a las 20:50 - 22:30</string>
+    <string name="banner_matricula">Conoce cómo\nmatricularte</string>
+    <string name="banner_info">Más información ></string>
 
-    <string name="nav_tablero">Tablero</string>
-    <string name="nav_account">Cuenta</string>
-    <string name="nav_courses">Cursos</string>
-    <string name="nav_calendar">Calendario</string>
-    <string name="nav_inbox">Bandeja de entrada</string>
-    <string name="nav_history">Historial</string>
-    <string name="nav_guides">GUIAS DE USO</string>
+    <!-- Botones del Grid -->
+    <string name="menu_notas">Notas</string>
+    <string name="menu_cursos">Cursos</string>
+    <string name="menu_correo">Correo</string>
+    <string name="menu_pagos">Pagos</string>
+    <string name="menu_trabajo">Trabajo</string>
+    <string name="menu_ubicate">Ubícate</string>
+    <string name="menu_tramites">Trámites</string>
+    <string name="menu_contactanos">Contáctanos</string>
 
-    <!-- Cuenta -->
-    <string name="profile_title">Perfil de Usuario</string>
-    <string name="edit_profile">EDITAR PERFIL</string>
+    <!-- Barra de navegación inferior -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_ajustes">Ajustes</string>
+    <string name="nav_horario">Horario</string>
+    <string name="nav_alertas">Alertas</string>
+    <string name="nav_buscar">Buscar</string>
 
-    <!-- Cursos -->
-    <string name="my_courses_title">Mis Cursos</string>
+    <!-- Títulos de secciones secundarias -->
+    <string name="titulo_tablero">Tablero</string>
+    <string name="titulo_cuenta">Perfil de Usuario</string>
+    <string name="titulo_cursos">Mis Cursos</string>
+    <string name="titulo_calendario">Calendario Académico</string>
+    <string name="titulo_guia">Guía de Uso</string>
 
-    <!-- Calendario -->
-    <string name="calendar_title">Calendario</string>
-    <string name="events_day">Eventos del día</string>
-
-    <!-- Bandeja -->
     <string name="inbox_title">Bandeja de Entrada</string>
-
-    <!-- Historial -->
+    <string name="profile_title">Mi Perfil</string>
+    <string name="email_label">Correo Electrónico</string>
+    <string name="phone_label">Teléfono</string>
+    <string name="bio_label">Biografía</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="my_courses_title">Mis Cursos</string>
     <string name="history_title">Historial</string>
-
-    <!-- Guía -->
-    <string name="guide_title">Guía de Uso</string>
 </resources>
