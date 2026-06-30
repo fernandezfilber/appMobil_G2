@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://tools.tools.org/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F2F2F2">
+    android:background="#F8F9FA">
 
     <!-- Barra Superior -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="64dp"
         android:background="#FFFFFF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:elevation="4dp">
+        android:elevation="2dp">
 
         <ImageView
             android:id="@+id/boton_volver"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="4dp"
-            android:src="@android:drawable/ic_menu_revert" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            android:contentDescription="Volver atrás" />
 
         <TextView
             android:id="@+id/tv_titulo_barra"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:text="Anuncios"
-            android:textColor="#333333"
+            android:textColor="#1A1A1A"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
+    <!-- Contenedor de la Lista -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_anuncios"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Pantalla de Anuncios\nEn construcción..."
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="#666666"/>
+        android:clipToPadding="false"
+        android:padding="16dp"
+        tools:listitem="@layout/item_anuncio" />
+
 </LinearLayout>
